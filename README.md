@@ -106,6 +106,7 @@ HTTP/1.1 200 OK
   "user": "5f4b71c7c152df3a1aaea1d0", 
   "createdAt": "2020-08-30T09:30:47.807Z"  
  }}  
+}
 ```  
   
 ### Error response example  
@@ -167,6 +168,7 @@ HTTP/1.1 200 OK
   "user": "5f4b71c7c152df3a1aaea1d0",  
   "createdAt": "2020-08-30T09:30:47.807Z"  
  }}  
+}
 ```  
   
 ### Error response example  
@@ -334,6 +336,7 @@ HTTP/1.1 200 OK
   "lastName": "Thakur",  
   "phone": "123-456-7890"  
  }}  
+}
 ```  
   
 ### Error response example  

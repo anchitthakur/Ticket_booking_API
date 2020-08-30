@@ -1,0 +1,236 @@
+{
+	"info": {
+		"_postman_id": "2e1a5f9d-67ca-44c4-a5fd-52640301b1cd",
+		"name": "Ticket",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Users by Ticket ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "55291040-aa22-4a4e-9015-bd8ba91ab0d8",
+						"exec": [
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Message should be Success\"] = jsonData.message === \"Success\";",
+							"tests[\"User should be present\"] = Object.keys(jsonData.user).length > 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/user?ticketId=5f4b88e592b457486648f2c6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"user"
+					],
+					"query": [
+						{
+							"key": "ticketId",
+							"value": "5f4b88e592b457486648f2c6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new ticket",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6f00c613-cb81-43db-bce2-e0d4261dce48",
+						"exec": [
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Message should be Success\"] = jsonData.message === \"Success\";",
+							"tests[\"Tickets should be present\"] = Object.keys(jsonData.ticket).length > 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "timings",
+							"value": "{{$randomDateFuture}}",
+							"type": "text"
+						},
+						{
+							"key": "fullName",
+							"value": "{{$randomFullName}}",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "{{$randomPhoneNumber}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:9000/ticket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit a ticket's timing",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa74c9e4-7098-4216-a34b-663da6405aa9",
+						"exec": [
+							"tests[\"Response code should be 200\"] = responseCode.code === 201;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Message should be Success\"] = jsonData.message === \"Success\";",
+							"tests[\"Tickets should be present\"] = Object.keys(jsonData.ticket).length > 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "timings",
+							"value": "{{$randomDateFuture}}",
+							"type": "text"
+						},
+						{
+							"key": "ticketId",
+							"value": "5f4bdefc7e5963b9f1da103d",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:9000/ticket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete ticket by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "400ef718-33aa-46a6-adbc-43fc64cd0804",
+						"exec": [
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Message should be Success\"] = jsonData.message === \"Success\";"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ticketId",
+							"value": "5f4bdfed86cc59bae5d9161e",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:9000/ticket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get tickets booked at a particular time",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e7f9ac3c-2078-4f24-9de2-2fa5b698f1ad",
+						"exec": [
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Message should be Success\"] = jsonData.message === \"Success\";",
+							"tests[\"Tickets should be present\"] = jsonData.tickets.length > 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/ticket?timings=2021-04-14T01:34:57.000Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"ticket"
+					],
+					"query": [
+						{
+							"key": "timings",
+							"value": "2021-04-14T01:34:57.000Z"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
