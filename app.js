@@ -7,12 +7,12 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: true,
 }));
-app.use('/ticket', require('./Routers/ticketRouter'));
-app.use('/user', require('./Routers/userRouter'));
+app.use('/Ticket', require('./Routers/ticketRouter'));
+app.use('/User', require('./Routers/userRouter'));
 
 
 app.get('/', async (req, res) => {
-    res.send({message: 'Welcome to ticket booking system'})
+    res.send({message: 'Welcome to Ticket booking system'})
 })
 
 app.all('*',(req,res)=>{

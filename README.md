@@ -10,6 +10,8 @@
 <a name="installation"></a>
 # Installation
 
+****Note: Screenshots are present in /Screenshots folder and Postman file is present in /Postman folder** 
+
 ### Requirements
  1. [Nodejs](https://nodejs.org/en/) is required.
  2. A running [MongoDB](https://www.mongodb.com/) instance is required.

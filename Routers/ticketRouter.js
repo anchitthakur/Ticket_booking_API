@@ -8,18 +8,18 @@ const mongoose = require('mongoose');
 
 /**
  * @apiDefine TicketSuccess
- * @apiSuccess {Date} timings Time for the ticket
+ * @apiSuccess {Date} timings Time for the Ticket
  * @apiSuccess {String} _id MongoDB generate _id
- * @apiSuccess {String} user _id of the user who booked the ticket
- * @apiSuccess {Date} createdAt Timestamp of the creation of the ticket
+ * @apiSuccess {String} User _id of the User who booked the Ticket
+ * @apiSuccess {Date} createdAt Timestamp of the creation of the Ticket
  * @apiSuccessExample {json} Success
  *    HTTP/1.1 200 OK
  *    {
  *    "message": "Success",
- *    "ticket": {
+ *    "Ticket": {
  *      "_id": "5f4b71c7ec53302d826a6dc6",
  *      "timings": "2020-11-17T16:30:28.000Z",
- *      "user": "5f4b71c7c152df3a1aaea1d0"
+ *      "User": "5f4b71c7c152df3a1aaea1d0"
  *      "createdAt": "2020-08-30T09:30:47.807Z"
  *      }
  *    }
@@ -27,12 +27,12 @@ const mongoose = require('mongoose');
 
 router.route('/')
     /**
-     * @api {post} /ticket Create a new ticket
+     * @api {post} /Ticket Create a new Ticket
      * @apiGroup Ticket
      * @apiUse TicketSuccess
-     * @apiParam {Date} timings Time for the ticket to be booked
-     * @apiParam {String} fullName Name of the user
-     * @apiParam {String} phone Phone number of the user
+     * @apiParam {Date} timings Time for the Ticket to be booked
+     * @apiParam {String} fullName Name of the User
+     * @apiParam {String} phone Phone number of the User
      * @apiExample Example usage:
      *    endpoint: http://localhost:9000/ticket
      *    body: {
@@ -43,7 +43,7 @@ router.route('/')
      * @apiErrorExample {json} Error Types
      *    HTTP/1.1 500 {"message": "Something went wrong"}
      *    HTTP/1.1 422 {"message": "Invalid input"}
-     *    HTTP/1.1 412 {"message": "Max ticket count exceeded"}
+     *    HTTP/1.1 412 {"message": "Max Ticket count exceeded"}
      */
     .post(async (req, res) => {
         try {
@@ -61,7 +61,7 @@ router.route('/')
                     const ticket = await Ticket.create({timings: Date.parse(timings), user: user._id})
                     res.status(200).send({message: 'Success',ticket})
                 } else {
-                    res.status(412).send({message: 'Max ticket count exceeded'})
+                    res.status(412).send({message: 'Max Ticket count exceeded'})
                 }
             }
         } catch (e) {
@@ -70,10 +70,10 @@ router.route('/')
         }
     })
     /**
-     * @api {patch} /ticket Change the timings of an existing ticket
+     * @api {patch} /Ticket Change the timings of an existing Ticket
      * @apiGroup Ticket
      * @apiUse TicketSuccess
-     * @apiParam {String} ticketId _id of the ticket to be changed
+     * @apiParam {String} ticketId _id of the Ticket to be changed
      * @apiParam {Date} timings new timings requested
      * @apiExample Example usage:
      *    endpoint: http://localhost:9000/ticket
@@ -84,7 +84,7 @@ router.route('/')
      * @apiErrorExample {json} Error Types
      *    HTTP/1.1 500 {"message": "Something went wrong"}
      *    HTTP/1.1 422 {"message": "Invalid input"}
-     *    HTTP/1.1 412 {"message": "Max ticket count exceeded"}
+     *    HTTP/1.1 412 {"message": "Max Ticket count exceeded"}
      */
     .patch(async (req, res) => {
         try {
@@ -98,7 +98,7 @@ router.route('/')
                     const ticket = await Ticket.findOneAndUpdate({_id}, {timings: Date.parse(timings)}, {new: true});
                     res.status(201).send({message: "Success", ticket})
                 } else {
-                    res.send({message: 'Max ticket count exceeded'})
+                    res.send({message: 'Max Ticket count exceeded'})
                 }
             }
         } catch (e) {
@@ -107,16 +107,16 @@ router.route('/')
         }
     })
     /**
-     * @api {get} /ticket Fetch all tickets for a particular timing
+     * @api {get} /Ticket Fetch all tickets for a particular timing
      * @apiGroup Ticket
      * @apiSuccess {Object[]} tickets Fetched tickets
-     * @apiSuccess {Date} ticket.timings Time for the ticket
-     * @apiSuccess {String} ticket._id MongoDB generate _id
-     * @apiSuccess {Date} ticket.createdAt Timestamp of the creation of the ticket
-     * @apiSuccess {Object} ticket.user User who booked the ticket
-     * @apiSuccess {String} ticket.user.firstName User's first name
-     * @apiSuccess {String} ticket.user.lastName User's last name
-     * @apiSuccess {String} ticket.user.phone User's phone number
+     * @apiSuccess {Date} Ticket.timings Time for the Ticket
+     * @apiSuccess {String} Ticket._id MongoDB generate _id
+     * @apiSuccess {Date} Ticket.createdAt Timestamp of the creation of the Ticket
+     * @apiSuccess {Object} Ticket.User User who booked the Ticket
+     * @apiSuccess {String} Ticket.User.firstName User's first name
+     * @apiSuccess {String} Ticket.User.lastName User's last name
+     * @apiSuccess {String} Ticket.User.phone User's phone number
      * @apiParam {Date} timings timings for the tickets
      * @apiExample Example usage:
      *    endpoint: http://localhost:9000/ticket
@@ -130,7 +130,7 @@ router.route('/')
      *    "tickets": [{
      *      "_id": "5f4b71c7ec53302d826a6dc6",
      *      "timings": "2020-11-17T16:30:28.000Z",
-     *      "user": {
+     *      "User": {
      *        "timings": "2020-11-17T16:30:28.000Z",
      *        "fullName": "Anchit Thakur",
      *        "phone": "123-456-7890"
@@ -162,9 +162,9 @@ router.route('/')
         }
     })
     /**
-     * @api {delete} /ticket Delete a ticket by it's _id
+     * @api {delete} /Ticket Delete a Ticket by it's _id
      * @apiGroup Ticket
-     * @apiParam {String} ticketId _id of the ticket to be changed
+     * @apiParam {String} ticketId _id of the Ticket to be changed
      * @apiExample Example usage:
      *    endpoint: http://localhost:9000/ticket
      *    body: {

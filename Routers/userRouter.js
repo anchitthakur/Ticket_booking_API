@@ -8,14 +8,14 @@ const mongoose = require('mongoose');
 router
     .route('/')
     /**
-     * @api {get} /user Fetch User by ticket ID
+     * @api {get} /User Fetch User by Ticket ID
      * @apiGroup User
      *
      * @apiSuccess {String} firstName User's first name
      * @apiSuccess {String} lastName User's last name
      * @apiSuccess {String} phone User's phone number
      * @apiSuccess {String} _id MongoDB generate _id
-     * @apiParam {String} query Ticket ID associated with the user
+     * @apiParam {String} query Ticket ID associated with the User
      * @apiExample Example usage:
      *    endpoint: http://localhost:9000/user
      *    query: {
@@ -25,7 +25,7 @@ router
      *    HTTP/1.1 200 OK
      *    {
      *    "message": "Success",
-     *    "user": {
+     *    "User": {
      *      "_id": "5f4a719fc95143c7813ff709",
      *      "firstName": "Anchit",
      *      "lastName": "Thakur"
