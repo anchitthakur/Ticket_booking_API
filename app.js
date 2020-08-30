@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
+require('./DBManager/connectToDB')();
 
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true,
 }));
+
 
 
 app.get('/', async (req, res) => {
