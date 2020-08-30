@@ -51,5 +51,24 @@ router.route('/')
             res.status(500).send({"message": "Something went wrong"});
         }
     })
+    .get(async (req, res) => {
+        try {
+            const {timings} = req.query;
+            if (!timings || isNaN(Date.parse(`${timings}`))) {
+                console.log(timings)
+                res.status(422).send({message: 'Invalid inputs'})
+            } else {
+                const tickets = await Ticket.find({timings: Date.parse(`${timings}`)}).populate('user');
+                if (tickets.length === 0)
+                    res.status(404).send({message: 'No tickets found'})
+                else
+                    res.send({message: 'Success', tickets})
+
+            }
+        } catch (e) {
+            console.log(e)
+            res.status(500).send({"message": "Something went wrong"})
+        }
+    })
 
 module.exports = router;
