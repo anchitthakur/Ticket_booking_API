@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: true,
 }));
-
+app.use('/ticket', require('./Routers/ticketRouter'));
 
 
 app.get('/', async (req, res) => {
