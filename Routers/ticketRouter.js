@@ -70,5 +70,24 @@ router.route('/')
             res.status(500).send({"message": "Something went wrong"})
         }
     })
+    .delete(async (req, res) => {
+        try {
+            const {ticketId} = req.body;
+            if (!ticketId) {
+                res.status(422).send({message: 'Invalid inputs'})
+            } else {
+                const _id = mongoose.Types.ObjectId(ticketId);
+                const response = await Ticket.deleteOne({_id});
+                console.log(response);
+                if (response.deletedCount === 1)
+                    res.send({message: 'Success'})
+                else
+                    res.status(404).send({message: 'Ticket not found / Already deleted'})
+            }
+        } catch (e) {
+            console.log(e)
+            res.status(500).send({"message": "Something went wrong"})
+        }
+    })
 
 module.exports = router;
