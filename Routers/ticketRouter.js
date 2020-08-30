@@ -31,5 +31,25 @@ router.route('/')
             res.status(500).send({"message": "Something went wrong"})
         }
     })
+    .patch(async (req, res) => {
+        try {
+            const {ticketId, timings} = req.body;
+            if (!timings || !ticketId || isNaN(Date.parse(timings))) {
+                res.status(422).send({message: 'Invalid inputs'})
+            } else {
+                const numTicketsAtTime = await Ticket.countDocuments({timings: Date.parse(timings)});
+                if (numTicketsAtTime < 10) {
+                    const _id = mongoose.Types.ObjectId(ticketId);
+                    const ticket = await Ticket.findOneAndUpdate({_id}, {timings: Date.parse(timings)}, {new: true});
+                    res.status(201).send({message: "Success", ticket})
+                } else {
+                    res.send({message: 'Max ticket count exceeded'})
+                }
+            }
+        } catch (e) {
+            console.log(e);
+            res.status(500).send({"message": "Something went wrong"});
+        }
+    })
 
 module.exports = router;
