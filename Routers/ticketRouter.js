@@ -49,7 +49,6 @@ router.route('/')
         try {
             const {timings, fullName, phone} = req.body;
             if (!timings || !fullName || !phone || isNaN(Date.parse(timings)) || !(/\d{3}-\d{3}-\d{4}/.test(phone))) {
-                console.log(req.body)
                 res.status(422).ssend({message: 'Invalid inputs'})
             } else {
                 const [firstName, lastName] = fullName.split(' ');
@@ -148,7 +147,6 @@ router.route('/')
         try {
             const {timings} = req.query;
             if (!timings || isNaN(Date.parse(`${timings}`))) {
-                console.log(timings)
                 res.status(422).send({message: 'Invalid inputs'})
             } else {
                 const tickets = await Ticket.find({timings: Date.parse(`${timings}`)}).populate('user');
@@ -187,7 +185,6 @@ router.route('/')
             } else {
                 const _id = mongoose.Types.ObjectId(ticketId);
                 const response = await Ticket.deleteOne({_id});
-                console.log(response);
                 if (response.deletedCount === 1)
                     res.send({message: 'Success'})
                 else

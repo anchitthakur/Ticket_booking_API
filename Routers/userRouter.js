@@ -44,7 +44,6 @@ router
                 res.status(422).send({message: 'Invalid inputs'})
             }
             const _id = mongoose.Types.ObjectId(ticketId);
-            console.log(_id)
             const response = await Ticket.findOne({_id}, {user: 1}).lean().populate('user');
             if (response)
                 res.send({message: 'Success', user: response.user})
