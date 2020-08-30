@@ -8,6 +8,7 @@ app.use(express.urlencoded({
     extended: true,
 }));
 app.use('/ticket', require('./Routers/ticketRouter'));
+app.use('/user', require('./Routers/userRouter'));
 
 
 app.get('/', async (req, res) => {
