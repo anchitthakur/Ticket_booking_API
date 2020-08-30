@@ -268,9 +268,9 @@ HTTP/1.1 200 OK
   "_id": "5f4b71c7ec53302d826a6dc6",  
   "timings": "2020-11-17T16:30:28.000Z",  
   "user": {  
-  "timings": "2020-11-17T16:30:28.000Z",  
   "fullName": "Anchit Thakur",  
   "phone": "123-456-7890",
+  },
   "createdAt": "2020-08-30T09:30:47.807Z"  
 }]  
 }  
@@ -306,7 +306,7 @@ Example usage:
   
 ```json  
 endpoint: http://localhost:9000/user  
-query: {"ticketId: "4d5c719fc95147c7213fa720"}  
+query: {"ticketId": "4d5c719fc95147c7213fa720"}  
 ```  
   
 ### Success response  
