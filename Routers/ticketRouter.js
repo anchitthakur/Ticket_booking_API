@@ -5,7 +5,46 @@ const Ticket = require('../DBManager/Models/ticket.model');
 const User = require('../DBManager/Models/user.model');
 const mongoose = require('mongoose');
 
+
+/**
+ * @apiDefine TicketSuccess
+ * @apiSuccess {Date} timings Time for the ticket
+ * @apiSuccess {String} _id MongoDB generate _id
+ * @apiSuccess {String} user _id of the user who booked the ticket
+ * @apiSuccess {Date} createdAt Timestamp of the creation of the ticket
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *    "message": "Success",
+ *    "ticket": {
+ *      "_id": "5f4b71c7ec53302d826a6dc6",
+ *      "timings": "2020-11-17T16:30:28.000Z",
+ *      "user": "5f4b71c7c152df3a1aaea1d0"
+ *      "createdAt": "2020-08-30T09:30:47.807Z"
+ *      }
+ *    }
+ */
+
 router.route('/')
+    /**
+     * @api {post} /ticket Create a new ticket
+     * @apiGroup Ticket
+     * @apiUse TicketSuccess
+     * @apiParam {Date} timings Time for the ticket to be booked
+     * @apiParam {String} fullName Name of the user
+     * @apiParam {String} phone Phone number of the user
+     * @apiExample Example usage:
+     *    endpoint: http://localhost:9000/ticket
+     *    body: {
+     *        "timings": "2020-11-17T16:30:28.000Z",
+     *        "fullName": "Anchit Thakur",
+     *        "phone": "123-456-7890"
+     *    }
+     * @apiErrorExample {json} Error Types
+     *    HTTP/1.1 500 {"message": "Something went wrong"}
+     *    HTTP/1.1 422 {"message": "Invalid input"}
+     *    HTTP/1.1 412 {"message": "Max ticket count exceeded"}
+     */
     .post(async (req, res) => {
         try {
             const {timings, fullName, phone} = req.body;
@@ -31,6 +70,23 @@ router.route('/')
             res.status(500).send({"message": "Something went wrong"})
         }
     })
+    /**
+     * @api {patch} /ticket Change the timings of an existing ticket
+     * @apiGroup Ticket
+     * @apiUse TicketSuccess
+     * @apiParam {String} ticketId _id of the ticket to be changed
+     * @apiParam {Date} timings new timings requested
+     * @apiExample Example usage:
+     *    endpoint: http://localhost:9000/ticket
+     *    body: {
+     *        "timings": "2020-11-17T16:30:28.000Z",
+     *        "ticketId": "4d5c719fc95147c7213fa720"
+     *    }
+     * @apiErrorExample {json} Error Types
+     *    HTTP/1.1 500 {"message": "Something went wrong"}
+     *    HTTP/1.1 422 {"message": "Invalid input"}
+     *    HTTP/1.1 412 {"message": "Max ticket count exceeded"}
+     */
     .patch(async (req, res) => {
         try {
             const {ticketId, timings} = req.body;
@@ -51,6 +107,43 @@ router.route('/')
             res.status(500).send({"message": "Something went wrong"});
         }
     })
+    /**
+     * @api {get} /ticket Fetch all tickets for a particular timing
+     * @apiGroup Ticket
+     * @apiSuccess {Object[]} tickets Fetched tickets
+     * @apiSuccess {Date} ticket.timings Time for the ticket
+     * @apiSuccess {String} ticket._id MongoDB generate _id
+     * @apiSuccess {Date} ticket.createdAt Timestamp of the creation of the ticket
+     * @apiSuccess {Object} ticket.user User who booked the ticket
+     * @apiSuccess {String} ticket.user.firstName User's first name
+     * @apiSuccess {String} ticket.user.lastName User's last name
+     * @apiSuccess {String} ticket.user.phone User's phone number
+     * @apiParam {Date} timings timings for the tickets
+     * @apiExample Example usage:
+     *    endpoint: http://localhost:9000/ticket
+     *    query: {
+     *        "timings": "2020-11-17T16:30:28.000Z",
+     *    }
+     * @apiSuccessExample {json} Success
+     *    HTTP/1.1 200 OK
+     *    {
+     *    "message": "Success",
+     *    "tickets": [{
+     *      "_id": "5f4b71c7ec53302d826a6dc6",
+     *      "timings": "2020-11-17T16:30:28.000Z",
+     *      "user": {
+     *        "timings": "2020-11-17T16:30:28.000Z",
+     *        "fullName": "Anchit Thakur",
+     *        "phone": "123-456-7890"
+     *      }
+     *      "createdAt": "2020-08-30T09:30:47.807Z"
+     *    }]
+     *    }
+     * @apiErrorExample {json} Error Types
+     *    HTTP/1.1 500 {"message": "Something went wrong"}
+     *    HTTP/1.1 422 {"message": "Invalid input"}
+     *    HTTP/1.1 404 {"message": "No tickets found"}
+     */
     .get(async (req, res) => {
         try {
             const {timings} = req.query;
@@ -70,6 +163,22 @@ router.route('/')
             res.status(500).send({"message": "Something went wrong"})
         }
     })
+    /**
+     * @api {delete} /ticket Delete a ticket by it's _id
+     * @apiGroup Ticket
+     * @apiParam {String} ticketId _id of the ticket to be changed
+     * @apiExample Example usage:
+     *    endpoint: http://localhost:9000/ticket
+     *    body: {
+     *        "ticketId": "4d5c719fc95147c7213fa720"
+     *    }
+     * @apiSuccessExample {json} Success
+     *    HTTP/1.1 200 OK {"message": "Success"}
+     * @apiErrorExample {json} Error Types
+     *    HTTP/1.1 500 {"message": "Something went wrong"}
+     *    HTTP/1.1 422 {"message": "Invalid input"}
+     *    HTTP/1.1 404 {"message": "Ticket not found / Already delete"}
+     */
     .delete(async (req, res) => {
         try {
             const {ticketId} = req.body;
