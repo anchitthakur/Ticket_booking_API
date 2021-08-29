@@ -78,7 +78,8 @@ Example usage:
 ```json  
 endpoint: http://localhost:9000/ticket  
 body: {  
- "timings": "2020-11-17T16:30:28.000Z", "ticketId": "4d5c719fc95147c7213fa720"}  
+ "timings": "2020-11-17T16:30:28.000Z", "ticketId": "4d5c719fc95147c7213fa720"
+}  
 ```  
   
 ### Success response  
@@ -105,7 +106,7 @@ HTTP/1.1 200 OK
   "timings": "2020-11-17T16:30:28.000Z",  
   "user": "5f4b71c7c152df3a1aaea1d0", 
   "createdAt": "2020-08-30T09:30:47.807Z"  
- }}  
+ }
 }
 ```  
   
@@ -140,7 +141,8 @@ Example usage:
 ```json  
 endpoint: http://localhost:9000/ticket  
 body: {  
- "timings": "2020-11-17T16:30:28.000Z", "fullName": "Anchit Thakur", "phone": "123-456-7890"}  
+ "timings": "2020-11-17T16:30:28.000Z", "fullName": "Anchit Thakur", "phone": "123-456-7890"
+}  
 ```  
   
 ### Success response  
@@ -167,7 +169,7 @@ HTTP/1.1 200 OK
   "timings": "2020-11-17T16:30:28.000Z",  
   "user": "5f4b71c7c152df3a1aaea1d0",  
   "createdAt": "2020-08-30T09:30:47.807Z"  
- }}  
+ }
 }
 ```  
   
@@ -200,7 +202,8 @@ Example usage:
 ```json  
 endpoint: http://localhost:9000/ticket  
 body: {  
- "ticketId": "4d5c719fc95147c7213fa720"}  
+ "ticketId": "4d5c719fc95147c7213fa720"
+}  
 ```  
   
 ### Success response example  
@@ -240,7 +243,8 @@ Example usage:
 ```json  
 endpoint: http://localhost:9000/ticket  
 query: {  
- "timings": "2020-11-17T16:30:28.000Z",}  
+ "timings": "2020-11-17T16:30:28.000Z",
+}  
 ```  
   
 ### Success response  
@@ -335,7 +339,7 @@ HTTP/1.1 200 OK
   "firstName": "Anchit",  
   "lastName": "Thakur",  
   "phone": "123-456-7890"  
- }}  
+ }
 }
 ```  
   
